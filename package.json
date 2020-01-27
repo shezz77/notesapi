@@ -4,13 +4,20 @@
   "description": "SA Notes App Api",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
   },
   "author": "Shezz77",
   "license": "ISC",
+  "repository": "https://github.com/shezz77/notesapi.git",
   "dependencies": {
     "express": "^4.17.1",
     "http-errors": "^1.7.3",
+    "mongoose": "^5.8.9",
+    "nodemon": "^2.0.2",
     "typescript": "^3.7.5"
+  },
+  "devDependencies": {
+    "http-status": "^1.4.2"
   }
 }
