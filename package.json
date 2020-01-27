@@ -1,0 +1,16 @@
+{
+  "name": "notesapi",
+  "version": "1.0.0",
+  "description": "SA Notes App Api",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Shezz77",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "http-errors": "^1.7.3",
+    "typescript": "^3.7.5"
+  }
+}
