@@ -1,6 +1,6 @@
-import { Router } from 'express';
-import HTTPStatus from 'http-status';
-import APIError from "../services/error";
+const { Router } = require('express');
+const HTTPStatus = require('http-status');
+const APIError from "../services/error";
 
 const routes = new Router();
 
