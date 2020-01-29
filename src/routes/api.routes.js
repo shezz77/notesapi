@@ -1,9 +1,9 @@
-import express from 'express';
+const express = require('express');
 
 const router = express.Router();
 
-import auth_routes from './../api/auth';
+const auth_routes = require('./../api/auth');
 
 router.use('/auth', auth_routes);
 
-export default router;
+module.exports = router;

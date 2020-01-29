@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const HTTPStatus = require('http-status');
-const APIError from "../services/error";
+const APIError = require("../services/error");
 
 const routes = new Router();
 
@@ -9,7 +9,10 @@ const isTest = process.env.NODE_ENV === 'test';
 
 const api_routes = require('./api.routes');
 
+
+// Module base routes
 routes.use('/api', api_routes);
+
 
 if (isDev || isTest) {
 
@@ -20,4 +23,4 @@ routes.all('*', (req, res, next) => {
 });
 
 
-export default routes;
+module.exports = routes;
