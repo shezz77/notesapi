@@ -11,36 +11,30 @@ dotenv.config();
 
 //db
 mongoose.connect(process.env.MONGO_URI,{useNewUrlParser: true, useUnifiedTopology: true})
-.then(() => console.log('DB Connected'))
+.then(() => console.log('DB Connected'));
 
 mongoose.connection.on('error', err => {
     console.log(`DB connection error ${err.message}`);
-})
+});
 
 // bring in routes
-const postRoutes = require('./routes/posts');
-const authRoutes = require('./routes/auth');
-const userRoutes = require('./routes/users');
+const apiRoutes = require('./routes/api');
 
-const SAMiddleware = (req, res, next) => {
-    console.log("Middleware applied!!!!");
-    next();
-}
+const demo = require('./middlewares/demo');
 
 //middleware
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(expressValidator());
-app.use(SAMiddleware)
+app.use(demo);
 
-app.use("/",  postRoutes);
-app.use("/",  authRoutes);
-app.use("/users",  userRoutes);
+app.use("/api",  apiRoutes);
 app.use(function (err, req, res, next) {
     if (err.name === 'UnauthorizedError') {
         res.status(401).send({error: 'Unauthorized!'});
     }
+    next();
 });
 
 const port = process.env.PORT || 8000;
