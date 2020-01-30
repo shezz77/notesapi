@@ -4,6 +4,7 @@
       <w>bcrypt</w>
       <w>dotenv</w>
       <w>mongoos</w>
+      <w>signup</w>
       <w>uuidv</w>
     </words>
   </dictionary>
