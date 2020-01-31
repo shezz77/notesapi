@@ -6,11 +6,12 @@ function isAuthenticated(req, res, next) {
     if (!token) {
         return res.status(401).send({ message: "No token provided." });
     }
+
     jwt.verify(token, process.env.JWT_SECRET, function(err, decoded) {
         if (err) {
             return res.status(401).send({ message: "Failed to authenticate token." });
         }
-        User.findOne({ _id: decoded.userId }, (err, user) => {
+        User.findOne({ _id: decoded._id }, (err, user) => {
             if (err) {
                 return res.status(500).send("Problem retrieving User from Database!");
             }
@@ -20,11 +21,7 @@ function isAuthenticated(req, res, next) {
                 req.user = user;
                 next();
             }
-        }).populate({
-            path: "userGroup",
-            select: ["name", "isAdmin", "level"],
-            populate: { path: "permissions", select: ["resource", "action", "name"] },
-        });
+        })
     });
 }
 

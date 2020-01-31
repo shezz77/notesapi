@@ -8,27 +8,27 @@ exports.getPosts = (req, res) => {
     .select("_id title body")
     .then((posts) => {
         res.json({
-            posts 
+            posts
           })
     })
     .catch(err => {
         console.log(err)
     })
-    
-} 
+
+};
 
 exports.signup = async (req, res) => {
     const userExists = await User.findOne({email: req.body.email});
 
     if(userExists) return res.status(403).json({
         error: 'Email is taken!'
-    })
+    });
 
     const user = new User(req.body);
     await user.save();
 
     res.json({message: 'Signup successful! Please login.'});
-}
+};
 
 exports.signin = (req, res) => {
     const {email, password} = req.body;
@@ -48,18 +48,18 @@ exports.signin = (req, res) => {
         const token = jwt.sign({_id: user._id}, process.env.JWT_SECRET);
 
         res.cookie('token', token, {expire: new Date() + 9999});
-        
+
         const {_id, name, email} = user;
         return res.json({token, user: {_id, email, name}});
     });
-}
+};
 
 exports.signout = (req, res) => {
     res.clearCookie('token');
     return res.json({message: 'signout successful'});
-}
+};
 
 exports.requireSignin = expressJwt({
     secret: process.env.JWT_SECRET,
     userProperty: 'auth'
-})
+});

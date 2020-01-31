@@ -11,6 +11,6 @@ router.post('/signup', userSignupValidator, authController.signup);
 router.post('/signin', authController.signin);
 router.get('/signout', authController.signout);
 
-router.param("userId", userById)
+router.param("userId", userById);
 
 module.exports = router;
