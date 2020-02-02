@@ -51,8 +51,8 @@ exports.update = (req, res) => {
         })
 };
 
-exports.destroy = (({body}), res) => {
-    Note.findById(body.id).exec((err, note) => {
+exports.destroy = (req, res, next, id) => {
+    Note.findById(id).exec((err, note) => {
         if (err)
             return res.status(400).json({
                 error: err
