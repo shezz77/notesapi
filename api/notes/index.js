@@ -4,7 +4,7 @@ const {all, store, update, destroy} = require('./notes.controller');
 const {isAuthenticated} = require('./../../middlewares/auth');
 
 router.post('/', store);
-router.delete('/:id', destroy);
+router.post('/:id', destroy);
 router.put('/:id', update);
 router.get('/', all);
 

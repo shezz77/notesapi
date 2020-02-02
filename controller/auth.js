@@ -32,7 +32,7 @@ exports.signup = async (req, res) => {
 
 exports.signin = (req, res) => {
     const {email, password} = req.body;
-    const user = User.findOne({email}, (err, user) => {
+    User.findOne({email}, (err, user) => {
         if (err || !user) {
             return res.status(401).json({
                 error: 'User with that email does not exist. Please Signup.'
@@ -49,8 +49,9 @@ exports.signin = (req, res) => {
 
         res.cookie('token', token, {expire: new Date() + 9999});
 
-        const {_id, name, email} = user;
-        return res.json({token, user: {_id, email, name}});
+
+        const {_id, name, email, role, data} = user;
+        return res.json({access_token: token, user: {_id, email, name, role, data}});
     });
 };
 

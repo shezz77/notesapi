@@ -60,7 +60,7 @@ exports.deleteUser = (req, res) => {
                 error: 'You are not authorized to perform this action'
             })
         }
-    
+
         user.hashed_password = undefined;
         user.salt = undefined;
         res.json({user});
@@ -76,7 +76,11 @@ exports.hasAuthorization = (req, res, next) => {
     }}
 
     next();
-}
+};
+
+exports.profile = (req, res) => {
+    res.json({user: req.user});
+};
 
 
 
