@@ -9,14 +9,14 @@ exports.getPosts = (req, res) => {
     .select("_id title body")
     .then((posts) => {
         res.json({
-            posts 
+            posts
           })
     })
     .catch(err => {
         console.log(err)
     })
-    
-} 
+
+}
 
 exports.postById = (req, res, next, id) => {
     Post.findById(id)
@@ -31,7 +31,7 @@ exports.postById = (req, res, next, id) => {
         req.post = post;
         next();
     })
-}
+};
 
 
 exports.createPost = (req, res) => {
@@ -117,7 +117,7 @@ exports.deletePost = (req, res) => {
                 error: 'You are not authorized to perform this action'
             })
         }
-    
+
         post.hashed_password = undefined;
         post.salt = undefined;
         res.json({post, message: 'Post deleted successfully'});

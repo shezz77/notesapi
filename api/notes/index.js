@@ -1,9 +1,11 @@
 const router = require('express').Router();
-const {all, store} = require('./notes.controller');
+const {all, store, update, destroy} = require('./notes.controller');
 
 const {isAuthenticated} = require('./../../middlewares/auth');
 
-router.get('/', all);
 router.post('/', store);
+router.delete('/:id', destroy);
+router.put('/:id', update);
+router.get('/', all);
 
 module.exports = router;

@@ -1,3 +1,5 @@
+// const formidable = require("formidable");
+
 const Note = require('./notes.model');
 const _ = require('lodash');
 
@@ -12,7 +14,8 @@ exports.all = (req, res) => {
 };
 
 exports.store = (req, res) => {
-    console.log(req.body);
+    // let form = new formidable.IncomingForm();
+    // console.log(form);
     let note = new Note(req.body);
     note.save((err, note) => {
         if (err)
@@ -24,4 +27,44 @@ exports.store = (req, res) => {
             note
         })
     })
+};
+
+exports.update = (req, res) => {
+    Note.findById(req.body._id)
+        .exec((err, note) => {
+            if (err)
+                return res.status(400).json({
+                    error: err
+                });
+            note = _.extend(note, req.body);
+            note.updateAt = Date.now();
+            note.save((err, note) => {
+                if (err)
+                    return res.status(400).json({
+                        error: err
+                    });
+                res.json({
+                    message: 'New note updated',
+                    note
+                })
+            })
+        })
+};
+
+exports.destroy = (({body}), res) => {
+    Note.findById(body.id).exec((err, note) => {
+        if (err)
+            return res.status(400).json({
+                error: err
+            });
+
+        note.remove((err, post) => {
+            if (err) {
+                return res.status(400).json({
+                    error: 'You are not authorized to perform this action'
+                })
+            }
+            res.json({post, message: 'Note deleted successfully'});
+        })
+    });
 };
