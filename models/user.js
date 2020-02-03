@@ -3,18 +3,15 @@ const uuidv1 = require('uuid/v1');
 const crypto = require('crypto');
 
 const userSchema = new mongoose.Schema({
-    name: {
+    uuid: {
         type: String,
-        required: true,
-        trim: true
+        default: uuidv1(),
     },
-    email: {
+    role: {
         type: String,
-        required: true,
-        trim: true
+        default: 'user'
     },
     data: Object,
-    role: String,
     hashed_password: {
         type: String,
         required: true,

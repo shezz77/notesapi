@@ -14,7 +14,10 @@ const noteSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    image: String,
+    imageBuffer: {
+        type: Buffer,
+        contentType: String,
+    },
     time: {
         type: Date,
         default: Date.now
@@ -38,5 +41,9 @@ const noteSchema = new mongoose.Schema({
         default: Date.now
     }
 });
+
+noteSchema.virtual('image').get(function() {
+    return this.imageBuffer || null;
+})
 
 module.exports = mongoose.model('Note', noteSchema);

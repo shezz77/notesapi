@@ -4,7 +4,8 @@ const Note = require('./notes.model');
 const _ = require('lodash');
 
 exports.all = (req, res) => {
-    Note.find()
+    console.log();
+    Note.find({createdBy: req.user._id})
         .then(notes => {
             res.json({notes})
         })
@@ -17,6 +18,8 @@ exports.store = (req, res) => {
     // let form = new formidable.IncomingForm();
     // console.log(form);
     let note = new Note(req.body);
+    note.createdBy = req.user;
+    console.log(req.user);
     note.save((err, note) => {
         if (err)
             return res.status(400).json({

@@ -8,7 +8,7 @@ const userRoutes = require('./users');
 const noteRoutes = require('./../api/notes');
 const labelRoutes = require('./../api/labels');
 
-router.use('/', authRoutes);
+router.use('/auth', authRoutes);
 router.use('/posts', postRoutes);
 router.use('/users', userRoutes);
 router.use('/notes', noteRoutes);

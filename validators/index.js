@@ -16,8 +16,9 @@ exports.createPostValidaor = (req, res, next) => {
 };
 
 exports.userSignupValidator = (req, res, next) => {
-    req.check('name', "Write a name").notEmpty();
-    req.check('name', "Name must be between 4 to 10 characters").isLength({min: 4, max: 10});
+    console.log(req.body);
+    req.check('displayName', "Display Name is required").notEmpty();
+    req.check('displayName', "display Name must be between 4 to 10 characters").isLength({min: 4, max: 10});
 
     req.check('email', "Write a email").notEmpty();
     req.check('email', "Email must be between 3 to 32 characters").isLength({min: 3, max: 32})
