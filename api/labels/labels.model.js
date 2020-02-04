@@ -14,6 +14,10 @@ const noteSchema = new mongoose.Schema({
         minlength: 4,
         maxlength: 150
     },
+    createdBy: {
+        type: ObjectId,
+        ref: 'User'
+    },
 
     notes: [{ type: ObjectId, ref: 'Note'}]
 });

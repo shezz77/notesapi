@@ -13,6 +13,7 @@ exports.all = (req, res) => {
 
 exports.store = (req, res) => {
     let label = new Label(req.body);
+    label.createBy = req.user;
     label.save((err, label) => {
         if (err)
             return res.status(400).json({
